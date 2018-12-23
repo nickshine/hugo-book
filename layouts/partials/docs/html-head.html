@@ -14,6 +14,12 @@
   {{ printf `<link rel="%s" type="%s" href="%s" title="%s" />` .Rel .MediaType.Type .Permalink $.Site.Title | safeHTML }}
 {{ end -}}
 
+{{ with .Site.Params.BookSearch }}
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.5/lunr.min.js" defer></script>
+  {{ $search := resources.Get "js/search.js" | resources.Minify | resources.Fingerprint }}
+  <script defer type="text/javascript" src="{{ $search.RelPermalink }}"></script>
+{{ end }}
+
 {{ "<!--" | safeHTML }}
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
