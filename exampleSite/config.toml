@@ -48,3 +48,6 @@ pygmentsCodeFences = true
   # - In git information
   # - In blog posts
   BookDateFormat = 'Jan 2, 2006'
+
+  # Enable search bar.
+  BookSearch = true

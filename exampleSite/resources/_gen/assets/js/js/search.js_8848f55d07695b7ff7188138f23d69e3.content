@@ -1,0 +1,92 @@
+var idx;
+var results = [];
+var $searchResults;
+var $searchInput;
+
+
+function init() {
+  console.log('init');
+  var request = new XMLHttpRequest();
+  var query = '';
+
+  $searchInput = document.getElementById('book-search');
+  $searchResults = document.getElementById('book-search-results');
+
+  request.overrideMimeType("application/json");
+  request.open("GET", "/index.json");
+  request.onload = function() {
+    if (request.status >= 200 && request.status < 400) {
+      var documents = JSON.parse(request.responseText);
+
+      idx = lunr(function() {
+        this.ref('ref');
+        this.field('title', {
+          boost: 15
+        });
+        this.field('excerpt');
+        this.field('body');
+
+        documents.forEach(function(doc) {
+          this.add(doc);
+          results[doc.ref] = {
+            'title': doc.title,
+            'excerpt': doc.excerpt
+          };
+        }, this)
+      });
+    } else {
+      $searchResults.innerHTML = 'Error loading search results';
+    }
+  };
+
+  request.onerror = function() {
+    $searchResults.innerHTML = 'Error loading search results';
+  }
+
+  request.send();
+
+  registerSearchHandler();
+}
+
+function registerSearchHandler() {
+  console.log(event);
+  $searchInput.oninput = function(event) {
+    var query = event.target.value;
+    var results = search(query);
+
+    renderSearchResults(results);
+
+
+    if ($searchInput.value == '') {
+      $searchResults.innerHTML = '';
+    }
+  }
+}
+
+function renderSearchResults(results) {
+  return results;
+}
+
+
+function search(query) {
+  return idx.search(query);
+}
+
+// window.onload = init();
+init();
+
+/**
+ * Trigger a search in lunr and transform the result
+ *
+ * @param  {String} query
+ * @return {Array}  results
+ */
+/*
+function search(query) {
+  // Find the item in our index corresponding to the lunr one to have more info
+  return lunrIndex.search(query).map(function(result) {
+    return pagesIndex.filter(function(page) {
+      return page.uri === result.ref;
+    })[0];
+  });
+}

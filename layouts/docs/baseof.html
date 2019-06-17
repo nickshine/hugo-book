@@ -24,6 +24,9 @@
 
     {{ template "toc" . }}
   </main>
+  {{ if .Site.Params.BookSearch }}
+    {{ partial "docs/search-results" . }}
+  {{ end }}
 
   {{ partial "docs/inject/body" . }}
   {{ template "_internal/google_analytics_async.html" . }}

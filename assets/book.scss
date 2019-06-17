@@ -201,6 +201,20 @@ aside nav,
   will-change: transform, margin-left;
 }
 
+#book-search-results {
+  position: absolute;
+  top: 0;
+  left: $menu-width;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.9);
+
+  &:empty {
+    display: none;
+  }
+
+}
+
 @media screen and (max-width: $md-breakpoint) {
   .book-toc {
     display: none;
