@@ -61,7 +61,13 @@ function renderSearch(query, results) {
   $searchResults.style.display = query ? 'block' : 'none';
   console.log(results);
   if (results.length) {
-    $searchResults.innerHTML = JSON.stringify(results, null, 2);
+    var res = '';
+    for (var i = 0; i < results.length; i++) {
+      console.log(i);
+      res += '<div class="search-result-item">' + results[i].ref + '</div>';
+    }
+
+    $searchResults.innerHTML = res;
   } else {
     $searchResults.innerHTML = '';
   }
@@ -91,3 +97,12 @@ function search(query) {
   });
 }
 */
+/*
+renderItem: function (item, search){
+    // escape special characters
+    search = search.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+    var re = new RegExp("(" + search.split(' ').join('|') + ")", "gi");
+    return '<div class="autocomplete-suggestion" data-val="' + item + '">' + item.replace(re, "<b>$1</b>") + '</div>';
+            },
+*/
+
