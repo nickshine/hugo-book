@@ -48,3 +48,6 @@ params:
   # - In git information
   # - In blog posts
   BookDateFormat: 'Jan 2, 2006'
+
+outputs:
+  home: ['HTML', 'RSS', 'JSON']

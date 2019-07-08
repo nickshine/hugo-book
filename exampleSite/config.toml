@@ -51,3 +51,7 @@ pygmentsCodeFences = true
 
   # Enable search bar.
   BookSearch = true
+
+[outputs]
+home = [ "HTML", "RSS", "JSON"]
+

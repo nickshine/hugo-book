@@ -18,8 +18,7 @@
   <!-- <script defer type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.5/lunr.min.js"></script> -->
   <script defer type="text/javascript" src="https://unpkg.com/lunr/lunr.js"></script>
 
-  <!-- {{ $search := resources.Get "js/search.js" | resources.Minify | resources.Fingerprint }} -->
-  {{ $search := resources.Get "js/search.js" }}
+  {{ $search := resources.Get "js/search.js" | resources.Minify | resources.Fingerprint }}
   <script defer type="text/javascript" src="{{ $search.RelPermalink }}"></script>
 {{ end }}
 
